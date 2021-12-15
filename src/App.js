@@ -1,0 +1,68 @@
+import React, { useEffect } from "react";
+import "./App.css";
+
+import { connect } from "react-redux";
+import {
+  selectHasMoreProductsToFetch,
+  selectIsFetchingProducts,
+  selectProducts
+} from "./redux/product/product.selectors";
+import {
+  startInitialProductsFetch,
+  startLoadingMoreProducts
+} from "./redux/product/product.actions";
+import usePaginationOnIntersection from "./hooks/usePaginationOnIntersection.hook";
+
+function App({
+  products,
+  fetchProducts,
+  fetchMoreProducts,
+  hasMoreProductsToFetch,
+  isFetchingProducts
+}) {
+  const fetchMoreOnIntersection = usePaginationOnIntersection(
+    fetchMoreProducts,
+    isFetchingProducts,
+    hasMoreProductsToFetch
+  );
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
+
+  return (
+    <section>
+      <h1 className="title">Products</h1>
+      <div className="product-container">
+        {(products || []).map((product, index) => (
+          <div
+            key={product.id}
+            className="product"
+            ref={
+              index + 1 === products.length
+                ? fetchMoreOnIntersection
+                : undefined
+            }
+          >
+            <span>Name: {product.dish}</span>
+            <span><img src={product.fileURL} width="50" /></span>
+          </div>
+        ))}
+        {isFetchingProducts && <p>Loading...</p>}
+      </div>
+    </section>
+  );
+}
+
+const mapStateToProps = (state) => ({
+  products: selectProducts(state),
+  isFetchingProducts: selectIsFetchingProducts(state),
+  hasMoreProductsToFetch: selectHasMoreProductsToFetch(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchProducts: () => dispatch(startInitialProductsFetch()),
+  fetchMoreProducts: () => dispatch(startLoadingMoreProducts())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
