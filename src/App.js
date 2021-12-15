@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import "./App.css";
+
+import "./App.css"
 
 import { connect } from "react-redux";
 import {
@@ -31,26 +32,34 @@ function App({
   }, [fetchProducts]);
 
   return (
-    <section>
-      <h1 className="title">Products</h1>
-      <div className="product-container">
+
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {(products || []).map((product, index) => (
-          <div
-            key={product.id}
-            className="product"
-            ref={
-              index + 1 === products.length
-                ? fetchMoreOnIntersection
-                : undefined
-            }
-          >
-            <span>Name: {product.dish}</span>
-            <span><img src={product.fileURL} width="50" alt="dish" /></span>
+          <div class="col">
+            <div
+              key={product.id}
+              className="card shadow-sm"
+              ref={
+                index + 1 === products.length
+                  ? fetchMoreOnIntersection
+                  : undefined
+              }
+            >
+              <img src={product.fileURL} class="card-img-top" alt="dish" />
+              <div class="card-body">
+                <h5 class="card-title">{product.restaurant}</h5>
+                <p class="card-text">{product.dish}</p>
+              </div>
+            </div>
           </div>
         ))}
         {isFetchingProducts && <p>Loading...</p>}
       </div>
-    </section>
+    </div>
+  </div>
   );
 }
 
