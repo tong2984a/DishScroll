@@ -45,7 +45,7 @@ function App({
             }
           >
             <span>Name: {product.dish}</span>
-            <span><img src={product.fileURL} width="50" /></span>
+            <span><img src={product.fileURL} width="50" alt="dish" /></span>
           </div>
         ))}
         {isFetchingProducts && <p>Loading...</p>}
