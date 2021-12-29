@@ -1,5 +1,5 @@
 import { firestore } from "./firebase.config";
-const productCollectionRef = firestore.collection("receipts");
+const productCollectionRef = firestore.collection("receipt_restaurants");
 
 export const executePaginatedQuery = async (paginatedQuery) => {
   const querySnapshot = await paginatedQuery.get();

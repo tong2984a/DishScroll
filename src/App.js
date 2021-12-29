@@ -52,6 +52,8 @@ function App({
               <div class="card-body">
                 <h5 class="card-title">{product.restaurant}</h5>
                 <p class="card-text">{product.dish}</p>
+                <p class="card-text">{product.address_c}</p>
+                <p class="card-text"><a href={product.reviewUrl}>Reviews</a></p>
               </div>
             </div>
           </div>
