@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import {Container, Nav, Navbar} from 'react-bootstrap';
+import {Container, Nav, Navbar, Button} from 'react-bootstrap';
 import "./App.css"
 
 import { connect } from "react-redux";
@@ -39,7 +39,10 @@ function App({
     <main>
       <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand href="#home">VEGAN DISH DIRECTORY</Navbar.Brand>
+          <Navbar.Brand href="#home">
+          <h5>VEGAN DISH DIRECTORY</h5>
+          <h6>Information contributed by local members 2021</h6>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
@@ -76,6 +79,11 @@ function App({
               </div>
             ))}
             {isFetchingProducts && <p>Loading...</p>}
+          </div>
+          <div class="row">
+            <div class="col text-center">
+              <Button variant="link" onClick={fetchMoreProducts}>Load More</Button>
+            </div>
           </div>
         </div>
       </div>
