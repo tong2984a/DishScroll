@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {Container, Nav, Navbar, NavDropdown} from 'react-bootstrap';
+import React, { useEffect } from "react";
+import {Container, Nav, Navbar} from 'react-bootstrap';
 import "./App.css"
 
 import { connect } from "react-redux";
@@ -36,23 +36,21 @@ function App({
   }, [fetchProducts]);
 
   return (
-
     <main>
-
       <Navbar bg="light" expand="lg">
-    <Container>
-      <Navbar.Brand href="#home">VEGAN DISH DIRECTORY</Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="me-auto">
-          <Nav.Link href="#" onClick={() => handleFilter('HK Island')}>Hong Kong 香港島</Nav.Link>
-          <Nav.Link href="#" onClick={() => handleFilter('Kowloon')}>Kowloon 九龍</Nav.Link>
-          <Nav.Link href="#" onClick={() => handleFilter('New Territories')}>New Territories 新界</Nav.Link>
-          <Nav.Link href="#" onClick={() => handleFilter('Outlying Islands')}>Outlying Islands 離島</Nav.Link>
-        </Nav>
-      </Navbar.Collapse>
-    </Container>
-  </Navbar>
+        <Container>
+          <Navbar.Brand href="#home">VEGAN DISH DIRECTORY</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link href="#" onClick={() => handleFilter('HK Island')}>Hong Kong 香港島</Nav.Link>
+              <Nav.Link href="#" onClick={() => handleFilter('Kowloon')}>Kowloon 九龍</Nav.Link>
+              <Nav.Link href="#" onClick={() => handleFilter('New Territories')}>New Territories 新界</Nav.Link>
+              <Nav.Link href="#" onClick={() => handleFilter('Outlying Islands')}>Outlying Islands 離島</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
       <div className="album py-5 bg-light">
         <div className="container">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
