@@ -9,3 +9,6 @@ export const selectIsFetchingProducts = (state) =>
 
 export const selectHasMoreProductsToFetch = (state) =>
   state.product.hasMoreToFetch;
+
+export const selectFilter = (state) =>
+  state.product.filter;

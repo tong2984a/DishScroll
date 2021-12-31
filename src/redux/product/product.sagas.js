@@ -13,13 +13,15 @@ import {
 } from "../../firebase-utils/firebase.product_utils";
 import {
   selectProductsPerPage,
-  selectLastVisibleDoc
+  selectLastVisibleDoc,
+  selectFilter
 } from "./product.selectors";
 
 function* fetchProducts() {
   try {
     const productsPerPage = yield select(selectProductsPerPage);
-    const { products, lastVisibleDoc } = yield getProducts(productsPerPage);
+    const filter = yield select(selectFilter);
+    const { products, lastVisibleDoc } = yield getProducts(productsPerPage, filter);
     if (!products.length) {
       return yield put(noMoreProductsToLoad());
     }
@@ -35,9 +37,11 @@ function* fetchMoreProducts() {
   try {
     const productsPerPage = yield select(selectProductsPerPage);
     const lastDoc = yield select(selectLastVisibleDoc);
+    const filter = yield select(selectFilter);
     const { products: newProducts, lastVisibleDoc } = yield getMoreProducts(
       lastDoc,
-      productsPerPage
+      productsPerPage,
+      filter
     );
     if (!newProducts.length) {
       return yield put(noMoreProductsToLoad());

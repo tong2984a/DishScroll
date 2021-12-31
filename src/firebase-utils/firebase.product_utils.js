@@ -24,18 +24,30 @@ export const excutePaginatedProductQuery = async (paginatedProductQuery) => {
   }
 };
 
-export const getProducts = async (productsPerPage) => {
-  const paginatedProductsQuery = productCollectionRef.limit(productsPerPage);
+export const getProducts = async (productsPerPage, filterBy) => {
+  let paginatedProductsQuery = productCollectionRef.limit(productsPerPage);
+  if (filterBy !== "") {
+    paginatedProductsQuery = productCollectionRef.limit(productsPerPage)
+      .where("region", "==", filterBy);
+  }
+
   const productsAndLastVisibleDoc = await excutePaginatedProductQuery(
     paginatedProductsQuery
   );
   return productsAndLastVisibleDoc;
 };
 
-export const getMoreProducts = async (lastVisibleDoc, productsPerPage) => {
-  const nextProductsQuery = productCollectionRef
+export const getMoreProducts = async (lastVisibleDoc, productsPerPage, filterBy) => {
+  let nextProductsQuery = productCollectionRef
     .startAfter(lastVisibleDoc)
     .limit(productsPerPage);
+  if (filterBy !== "") {
+    nextProductsQuery = productCollectionRef
+    .startAfter(lastVisibleDoc)
+    .limit(productsPerPage)
+    .where("region", "==", filterBy);
+  }
+
   const productsAndLastVisibleDoc = await excutePaginatedProductQuery(
     nextProductsQuery
   );

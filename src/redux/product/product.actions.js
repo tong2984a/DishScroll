@@ -1,7 +1,8 @@
 import PRODUCT_ACTION_TYPES from "./product.action.types";
 
-export const startInitialProductsFetch = () => ({
-  type: PRODUCT_ACTION_TYPES.START_INITIAL_PRODUCTS_FETCH
+export const startInitialProductsFetch = (filter) => ({
+  type: PRODUCT_ACTION_TYPES.START_INITIAL_PRODUCTS_FETCH,
+  payload: { filter }
 });
 
 export const initialProductsFetchFail = (errorMsg) => ({
